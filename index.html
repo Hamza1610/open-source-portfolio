@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Muhammad Hamza | Open Source Portfolio</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+  
+  <!-- Custom Scripts -->
+  <script src="js/script.js" defer></script>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-amber-200 selection:text-navy">
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 w-full bg-white/90 backdrop-blur-md z-50 border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="#home" class="flex items-center gap-3 text-xl font-bold text-navy hover:text-amber-700 transition">
+        <img src="assets/profile.jpg" alt="Muhammad Hamza" class="w-8 h-8 rounded-full object-cover border border-accent/50 shadow-sm" onerror="this.src='https://avatars.githubusercontent.com/u/95727844?v=4'">
+        <span>Muhammad Hamza</span>
+      </a>
+      
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex space-x-7 items-center font-medium text-slate-600">
+        <a href="#about" class="nav-link hover:text-accent transition">About</a>
+        <a href="#skills" class="nav-link hover:text-accent transition">Skills</a>
+        <a href="#contributions" class="nav-link hover:text-accent transition">Contributions</a>
+        <a href="#articles" class="nav-link hover:text-accent transition">Articles</a>
+        <a href="#design" class="nav-link hover:text-accent transition">Design & Reflection</a>
+        <a href="#contact" class="nav-link hover:text-accent transition">Contact</a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button id="menu-btn" class="md:hidden text-2xl text-slate-700 hover:text-navy focus:outline-none" aria-label="Toggle navigation menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-200 shadow-lg">
+      <div class="px-6 py-4 flex flex-col space-y-3 font-medium text-slate-700">
+        <a href="#about" class="hover:text-accent transition py-1">About</a>
+        <a href="#skills" class="hover:text-accent transition py-1">Skills</a>
+        <a href="#contributions" class="hover:text-accent transition py-1">Contributions</a>
+        <a href="#articles" class="hover:text-accent transition py-1">Articles</a>
+        <a href="#design" class="hover:text-accent transition py-1">Design & Reflection</a>
+        <a href="#contact" class="hover:text-accent transition py-1">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section with Profile Picture -->
+  <section id="home" class="min-h-screen flex items-center bg-gradient-to-br from-navy via-slate-900 to-slate-800 text-white pt-24 pb-16">
+    <div class="max-w-6xl mx-auto px-6 py-12 w-full">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Text & Call to Action (Left Column) -->
+        <div class="lg:col-span-7 fade-in">
+          <div class="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 text-amber-300 px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider mb-6">
+            <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+            BTrust Fellowship 2026
+          </div>
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight tracking-tight text-white">
+            Open Source <br>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-400 to-amber-200">Portfolio</span>
+          </h1>
+          <p class="text-lg sm:text-xl text-slate-300 max-w-xl mb-8 leading-relaxed">
+            Bitcoin Core and LDK (rust-lightning) contributions — advancing protocol development from theory to merged pull requests.
+          </p>
+          <div class="flex flex-wrap gap-4 items-center">
+            <a href="#contributions" class="inline-flex items-center gap-2 bg-accent text-navy px-6 py-3 rounded-lg font-semibold hover:bg-amber-400 transition shadow-lg shadow-amber-900/20">
+              <span>View Contributions</span>
+              <i class="fas fa-arrow-down text-sm"></i>
+            </a>
+            <a href="#articles" class="inline-flex items-center gap-2 bg-slate-800/80 hover:bg-slate-700 text-slate-200 border border-slate-700 px-6 py-3 rounded-lg font-medium transition">
+              <span>Read Articles</span>
+              <i class="fas fa-book-open text-sm"></i>
+            </a>
+            <a href="https://github.com/Hamza1610" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-slate-800/80 hover:bg-slate-700 text-slate-200 border border-slate-700 px-4 py-3 rounded-lg font-medium transition" title="GitHub Profile">
+              <i class="fab fa-github text-lg"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Profile Picture Section (Right Column) -->
+        <div class="lg:col-span-5 flex flex-col items-center justify-center fade-in">
+          <div class="profile-img-container text-center">
+            <div class="profile-img-glow"></div>
+            <div class="profile-img-frame w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64 rounded-full overflow-hidden mx-auto mb-6 bg-slate-800">
+              <img 
+                src="assets/profile.jpg" 
+                alt="Muhammad Hamza Profile Picture" 
+                class="w-full h-full object-cover"
+                onerror="this.src='https://avatars.githubusercontent.com/u/95727844?v=4'"
+              >
+            </div>
+            
+            <!-- Quick Status Badge -->
+            <div class="inline-flex items-center gap-2 bg-slate-800/90 border border-slate-700 px-4 py-1.5 rounded-full text-xs text-slate-200 shadow-md">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
+              <span class="font-medium">Active Bitcoin & LDK Contributor</span>
+            </div>
+            
+            <p class="text-xs text-slate-400 mt-2">Bitcoin Core &bull; Rust &bull; Lightning</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="py-20 bg-white border-b border-slate-100">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+        <div>
+          <span class="text-accent text-sm font-semibold uppercase tracking-wider">About Me</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-navy mt-1 fade-in">Professional Summary</h2>
+        </div>
+      </div>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div class="lg:col-span-8">
+          <p class="text-lg leading-relaxed text-slate-600 mb-6 fade-in">
+            Software engineer with a background in AI and full-stack development. Over the past three months I focused on open-source contribution in the Bitcoin ecosystem, moving from protocol theory into hands-on review and implementation work on Bitcoin Core and LDK (rust-lightning).
+          </p>
+          <p class="text-lg leading-relaxed text-slate-600 fade-in">
+            The work included building projects from source, reviewing pull requests and issues, reproducing bugs, writing design documents, and publishing technical articles.
+          </p>
+        </div>
+
+        <!-- Quick Metrics Highlights Card -->
+        <div class="lg:col-span-4 bg-slate-50 border border-slate-200 rounded-xl p-6 shadow-sm fade-in">
+          <h3 class="text-sm font-bold uppercase tracking-wider text-slate-500 mb-4">Contribution Highlights</h3>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="bg-white p-3.5 rounded-lg border border-slate-200/80">
+              <div class="text-2xl font-bold text-navy">5+</div>
+              <div class="text-xs text-slate-500 mt-0.5">Merged PR Reviews</div>
+            </div>
+            <div class="bg-white p-3.5 rounded-lg border border-slate-200/80">
+              <div class="text-2xl font-bold text-navy">3+</div>
+              <div class="text-xs text-slate-500 mt-0.5">LDK Pull Requests</div>
+            </div>
+            <div class="bg-white p-3.5 rounded-lg border border-slate-200/80">
+              <div class="text-2xl font-bold text-navy">8+</div>
+              <div class="text-xs text-slate-500 mt-0.5">Issues Investigated</div>
+            </div>
+            <div class="bg-white p-3.5 rounded-lg border border-slate-200/80">
+              <div class="text-2xl font-bold text-navy">4+</div>
+              <div class="text-xs text-slate-500 mt-0.5">Technical Articles</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" class="py-20 bg-slate-50 border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="mb-12">
+        <span class="text-accent text-sm font-semibold uppercase tracking-wider">Expertise</span>
+        <h2 class="text-3xl sm:text-4xl font-bold text-navy mt-1 fade-in">Skills and Tools</h2>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 card-hover fade-in">
+          <div class="w-12 h-12 flex items-center justify-center rounded-lg bg-amber-50 text-accent text-2xl mb-4">
+            <i class="fas fa-code"></i>
+          </div>
+          <h3 class="font-semibold text-lg text-navy">Rust</h3>
+          <p class="text-slate-600 text-sm mt-2 leading-relaxed">LDK codebase, data structures, testing, no-std considerations</p>
+        </div>
+        
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 card-hover fade-in">
+          <div class="w-12 h-12 flex items-center justify-center rounded-lg bg-amber-50 text-accent text-2xl mb-4">
+            <i class="fab fa-bitcoin"></i>
+          </div>
+          <h3 class="font-semibold text-lg text-navy">Bitcoin Core</h3>
+          <p class="text-slate-600 text-sm mt-2 leading-relaxed">Building from source, RPC tracing, functional tests, PR review process</p>
+        </div>
+        
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 card-hover fade-in">
+          <div class="w-12 h-12 flex items-center justify-center rounded-lg bg-amber-50 text-accent text-2xl mb-4">
+            <i class="fas fa-bolt"></i>
+          </div>
+          <h3 class="font-semibold text-lg text-navy">Lightning / LDK</h3>
+          <p class="text-slate-600 text-sm mt-2 leading-relaxed">Protocol concepts and LDK architecture</p>
+        </div>
+        
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 card-hover fade-in">
+          <div class="w-12 h-12 flex items-center justify-center rounded-lg bg-amber-50 text-accent text-2xl mb-4">
+            <i class="fas fa-code-branch"></i>
+          </div>
+          <h3 class="font-semibold text-lg text-navy">Open Source Practices</h3>
+          <p class="text-slate-600 text-sm mt-2 leading-relaxed">Issue reproduction, design documents, clear review comments</p>
+        </div>
+        
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 card-hover fade-in">
+          <div class="w-12 h-12 flex items-center justify-center rounded-lg bg-amber-50 text-accent text-2xl mb-4">
+            <i class="fas fa-pen-nib"></i>
+          </div>
+          <h3 class="font-semibold text-lg text-navy">Technical Writing</h3>
+          <p class="text-slate-600 text-sm mt-2 leading-relaxed">Protocol explanations and contribution guides</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-100 card-hover fade-in">
+          <div class="w-12 h-12 flex items-center justify-center rounded-lg bg-amber-50 text-accent text-2xl mb-4">
+            <i class="fas fa-vial-circle-check"></i>
+          </div>
+          <h3 class="font-semibold text-lg text-navy">Testing & Debugging</h3>
+          <p class="text-slate-600 text-sm mt-2 leading-relaxed">Reproducing edge cases, sanitizer fixes, and functional test coverage</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contributions -->
+  <section id="contributions" class="py-20 bg-white border-b border-slate-100">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="mb-12">
+        <span class="text-accent text-sm font-semibold uppercase tracking-wider">Track Record</span>
+        <h2 class="text-3xl sm:text-4xl font-bold text-navy mt-1 fade-in">Open-Source Contributions</h2>
+        <p class="text-slate-500 text-sm mt-2">All pull requests and issues are linked directly to GitHub and Rust-Bitcoin repositories.</p>
+      </div>
+
+      <!-- Bitcoin Core -->
+      <div class="mb-16">
+        <div class="flex items-center gap-3 mb-2">
+          <i class="fab fa-bitcoin text-amber-500 text-2xl"></i>
+          <h3 class="text-2xl font-bold text-navy">Bitcoin Core</h3>
+        </div>
+        <p class="text-slate-600 mb-6 max-w-3xl">Built from source, traced RPC handlers, and systematically reviewed pull requests and issues.</p>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+          
+          <!-- Merged PR Reviews -->
+          <div class="bg-slate-50/70 p-6 rounded-xl border border-slate-200">
+            <div class="flex items-center justify-between mb-4 pb-2 border-b border-slate-200">
+              <h4 class="font-semibold text-base text-navy flex items-center gap-2">
+                <i class="fas fa-check-circle text-emerald-600 text-sm"></i>
+                <span>Merged PR Reviews</span>
+              </h4>
+              <span class="text-xs text-slate-500 font-mono">5 PRs</span>
+            </div>
+            
+            <div class="contribution-list">
+              <div class="contribution-item">
+                <a href="https://github.com/bitcoin/bitcoin/pull/36310" target="_blank" rel="noopener noreferrer" class="contribution-badge badge-pr" title="Open Bitcoin Core PR 36310">
+                  <span>PR 36310</span>
+                  <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
+                </a>
+                <span class="contribution-desc">Unique address count clarification</span>
+              </div>
+              <div class="contribution-item">
+                <a href="https://github.com/bitcoin/bitcoin/pull/36312" target="_blank" rel="noopener noreferrer" class="contribution-badge badge-pr" title="Open Bitcoin Core PR 36312">
+                  <span>PR 36312</span>
+                  <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
+                </a>
+                <span class="contribution-desc">Private broadcast peer handling</span>
+              </div>
+              <div class="contribution-item">
+                <a href="https://github.com/bitcoin/bitcoin/pull/36321" target="_blank" rel="noopener noreferrer" class="contribution-badge badge-pr" title="Open Bitcoin Core PR 36321">
+                  <span>PR 36321</span>
+                  <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
+                </a>
+                <span class="contribution-desc">Integer sanitizer fix</span>
+              </div>
+              <div class="contribution-item">
+                <a href="https://github.com/bitcoin/bitcoin/pull/36282" target="_blank" rel="noopener noreferrer" class="contribution-badge badge-pr" title="Open Bitcoin Core PR 36282">
+                  <span>PR 36282</span>
+                  <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
+                </a>
+                <span class="contribution-desc">C++17 leveldb updates</span>
+              </div>
+              <div class="contribution-item">
+                <a href="https://github.com/bitcoin/bitcoin/pull/36286" target="_blank" rel="noopener noreferrer" class="contribution-badge badge-pr" title="Open Bitcoin Core PR 36286">
+                  <span>PR 36286</span>
+                  <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
+                </a>
+                <span class="contribution-desc">MuHash edge case</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Issue Reproductions -->
+          <div class="bg-slate-50/70 p-6 rounded-xl border border-slate-200">
+            <div class="flex items-center justify-between mb-4 pb-2 border-b border-slate-200">
+              <h4 class="font-semibold text-base text-navy flex items-center gap-2">
+                <i class="fas fa-bug text-amber-600 text-sm"></i>
+                <span>Issue Reproductions</span>
+              </h4>
+              <span class="text-xs text-slate-500 font-mono">3 Issues</span>
+            </div>
+            
+            <div class="contribution-list">
+              <div class="contribution-item">
+                <a href="https://github.com/bitcoin/bitcoin/issues/36323" target="_blank" rel="noopener noreferrer" class="contribution-badge badge-issue" title="Open Bitcoin Core Issue 36323">
+                  <span>Issue 36323</span>
+                  <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
+                </a>
+                <span class="contribution-desc">Taproot MuSig2 leaf hashes</span>
+              </div>
+              <div class="contribution-item">
+                <a href="https://github.com/bitcoin/bitcoin/issues/36414" target="_blank" rel="noopener noreferrer" class="contribution-badge badge-issue" title="Open Bitcoin Core Issue 36414">
+                  <span>Issue 36414</span>
+                  <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
+                </a>
+                <span class="contribution-desc">Pubkey comparison in descriptors</span>
+              </div>
+              <div class="contribution-item">
+                <a href="https://github.com/bitcoin/bitcoin/issues/36431" target="_blank" rel="noopener noreferrer" class="contribution-badge badge-issue" title="Open Bitcoin Core Issue 36431">
+                  <span>Issue 36431</span>
+                  <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
+                </a>
+                <span class="contribution-desc">Upgrade documentation</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- LDK (rust-lightning) -->
+      <div>
+        <div class="flex items-center gap-3 mb-2">
+          <i class="fas fa-bolt text-amber-500 text-2xl"></i>
+          <h3 class="text-2xl font-bold text-navy">LDK (rust-lightning)</h3>
+        </div>
+        <p class="text-slate-600 mb-6 max-w-3xl">Focused on on-chain wallet utilities and coin-selection logic. Opened pull requests and reviewed related issues.</p>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+          
+          <!-- LDK Pull Requests -->
+          <div class="bg-slate-50/70 p-6 rounded-xl border border-slate-200">
+            <div class="flex items-center justify-between mb-4 pb-2 border-b border-slate-200">
+              <h4 class="font-semibold text-base text-navy flex items-center gap-2">
+                <i class="fas fa-code-pull-request text-blue-600 text-sm"></i>
+                <span>Pull Requests</span>
+              </h4>
+              <span class="text-xs text-slate-500 font-mono">3 PRs</span>
+            </div>
+            
+            <div class="contribution-list">
+              <div class="contribution-item">
+                <a href="https://git.rust-bitcoin.org/lightningdevkit/rust-lightning/pulls/4892" target="_blank" rel="noopener noreferrer" class="contribution-badge badge-pr" title="Open LDK PR 4892">
+                  <span>PR 4892</span>
+                  <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
+                </a>
+                <span class="contribution-desc">RouterConfig / ignore_fee_nodes</span>
+              </div>
+              <div class="contribution-item">
+                <a href="https://git.rust-bitcoin.org/lightningdevkit/rust-lightning/pulls/5515" target="_blank" rel="noopener noreferrer" class="contribution-badge badge-pr" title="Open LDK PR 5515">
+                  <span>PR 5515</span>
+                  <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
+                </a>
+                <span class="contribution-desc">Forced conflicting coin selection</span>
+              </div>
+              <div class="contribution-item">
+                <a href="https://git.rust-bitcoin.org/lightningdevkit/rust-lightning/pulls/5579" target="_blank" rel="noopener noreferrer" class="contribution-badge badge-pr" title="Open LDK PR 5579">
+                  <span>PR 5579</span>
+                  <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
+                </a>
+                <span class="contribution-desc">Flaky test fix</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- LDK Issues Reviewed -->
+          <div class="bg-slate-50/70 p-6 rounded-xl border border-slate-200">
+            <div class="flex items-center justify-between mb-4 pb-2 border-b border-slate-200">
+              <h4 class="font-semibold text-base text-navy flex items-center gap-2">
+                <i class="fas fa-magnifying-glass text-indigo-600 text-sm"></i>
+                <span>Issues Reviewed</span>
+              </h4>
+              <span class="text-xs text-slate-500 font-mono">5 Issues</span>
+            </div>
+            
+            <div class="contribution-list">
+              <div class="contribution-item">
+                <a href="https://git.rust-bitcoin.org/lightningdevkit/rust-lightning/issues/5435" target="_blank" rel="noopener noreferrer" class="contribution-badge badge-issue" title="Open LDK Issue 5435">
+                  <span>Issue 5435</span>
+                  <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
+                </a>
+                <span class="contribution-desc">Coin selection optimization</span>
+              </div>
+              <div class="contribution-item">
+                <a href="https://git.rust-bitcoin.org/lightningdevkit/rust-lightning/issues/5407" target="_blank" rel="noopener noreferrer" class="contribution-badge badge-issue" title="Open LDK Issue 5407">
+                  <span>Issue 5407</span>
+                  <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
+                </a>
+                <span class="contribution-desc">RGS pruning performance</span>
+              </div>
+              <div class="contribution-item">
+                <a href="https://git.rust-bitcoin.org/lightningdevkit/rust-lightning/issues/5421" target="_blank" rel="noopener noreferrer" class="contribution-badge badge-issue" title="Open LDK Issue 5421">
+                  <span>Issue 5421</span>
+                  <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
+                </a>
+                <span class="contribution-desc">Sync cancellation safety</span>
+              </div>
+              <div class="contribution-item">
+                <a href="https://git.rust-bitcoin.org/lightningdevkit/rust-lightning/issues/3114" target="_blank" rel="noopener noreferrer" class="contribution-badge badge-issue" title="Open LDK Issue 3114">
+                  <span>Issue 3114</span>
+                  <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
+                </a>
+                <span class="contribution-desc">Flaky announcement test</span>
+              </div>
+              <div class="contribution-item">
+                <a href="https://git.rust-bitcoin.org/lightningdevkit/rust-lightning/issues/4769" target="_blank" rel="noopener noreferrer" class="contribution-badge badge-issue" title="Open LDK Issue 4769">
+                  <span>Issue 4769</span>
+                  <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
+                </a>
+                <span class="contribution-desc">High-fee border nodes</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technical Articles -->
+  <section id="articles" class="py-20 bg-slate-50 border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="mb-12">
+        <span class="text-accent text-sm font-semibold uppercase tracking-wider">Publications</span>
+        <h2 class="text-3xl sm:text-4xl font-bold text-navy mt-1 fade-in">Technical Articles</h2>
+      </div>
+      <div class="space-y-6">
+        
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200/80 card-hover fade-in">
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <h3 class="font-semibold text-lg text-navy">
+                <a href="https://medium.com/@hamza.00dev1/inefficiency-of-bitcoins-legacy-block-relay-ba93698ef6e6" target="_blank" rel="noopener noreferrer" class="hover:text-accent transition flex items-center gap-2">
+                  <span>Inefficiency of Bitcoin’s Legacy Block Relay</span>
+                  <i class="fas fa-arrow-up-right-from-square text-xs text-slate-400"></i>
+                </a>
+              </h3>
+              <p class="text-slate-600 text-sm mt-2 leading-relaxed">Explains high- and low-bandwidth relay and the trade-offs of the legacy approach.</p>
+            </div>
+            <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded font-medium shrink-0">Medium</span>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200/80 card-hover fade-in">
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <h3 class="font-semibold text-lg text-navy">
+                <a href="https://medium.com/@hamza.00dev1/understanding-hash-time-locked-contracts-in-lightning-885de1444160" target="_blank" rel="noopener noreferrer" class="hover:text-accent transition flex items-center gap-2">
+                  <span>Understanding Hash Time Locked Contracts in Lightning</span>
+                  <i class="fas fa-arrow-up-right-from-square text-xs text-slate-400"></i>
+                </a>
+              </h3>
+              <p class="text-slate-600 text-sm mt-2 leading-relaxed">Plain-language explanation of HTLCs, spending paths, and simple script examples.</p>
+            </div>
+            <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded font-medium shrink-0">Medium</span>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200/80 card-hover fade-in">
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <h3 class="font-semibold text-lg text-navy">
+                <a href="https://medium.com/@hamza.00dev1/under-the-hood-of-bitcoin-core-a-hands-on-guide-to-building-testing-and-contributing-196b27c6d3f7" target="_blank" rel="noopener noreferrer" class="hover:text-accent transition flex items-center gap-2">
+                  <span>Under the Hood of Bitcoin Core</span>
+                  <i class="fas fa-arrow-up-right-from-square text-xs text-slate-400"></i>
+                </a>
+              </h3>
+              <p class="text-slate-600 text-sm mt-2 leading-relaxed">Practical guide covering cloning, building, testing, and checking out pull requests.</p>
+            </div>
+            <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded font-medium shrink-0">Medium</span>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200/80 card-hover fade-in">
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <h3 class="font-semibold text-lg text-navy">
+                <a href="https://medium.com/@hamza.00dev1/frost-how-it-works-how-it-compares-to-multisig-and-musig2-and-when-to-use-it-b96dad31195a" target="_blank" rel="noopener noreferrer" class="hover:text-accent transition flex items-center gap-2">
+                  <span>FROST: How It Works and When to Use It</span>
+                  <i class="fas fa-arrow-up-right-from-square text-xs text-slate-400"></i>
+                </a>
+              </h3>
+              <p class="text-slate-600 text-sm mt-2 leading-relaxed">Research article covering FROST key generation, comparisons, and protocol steps.</p>
+            </div>
+            <span class="text-xs bg-slate-100 text-slate-600 px-2.5 py-1 rounded font-medium shrink-0">Medium</span>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200/80 card-hover fade-in">
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <h3 class="font-semibold text-lg text-navy">
+                <span>From Theory to Code</span>
+              </h3>
+              <p class="text-slate-600 text-sm mt-2 leading-relaxed">Reflection on the three-month progression from theory through Bitcoin Core review work to LDK contributions.</p>
+            </div>
+            <span class="text-xs bg-amber-50 text-amber-800 border border-amber-200 px-2.5 py-1 rounded font-medium shrink-0">Essay</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Design + Reflection -->
+  <section id="design" class="py-20 bg-white border-b border-slate-100">
+    <div class="max-w-6xl mx-auto px-6">
+      
+      <!-- Design Documents -->
+      <div class="mb-16">
+        <span class="text-accent text-sm font-semibold uppercase tracking-wider">Engineering Specs</span>
+        <h2 class="text-3xl sm:text-4xl font-bold text-navy mt-1 mb-6 fade-in">Design Documents</h2>
+        <div class="bg-slate-50 border border-slate-200 rounded-xl p-8 fade-in">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="bg-amber-100 text-amber-900 border border-amber-300 text-xs font-mono font-semibold px-2.5 py-1 rounded">RFC / SPEC</span>
+            <h3 class="text-xl font-bold text-navy">Issue 5435 — Forced Conflicting Coin Selection Optimization</h3>
+          </div>
+          <p class="text-lg text-slate-600 leading-relaxed mb-4">
+            Comprehensive design document covering problem analysis, comparison of candidate approaches, recommended selection policy, implementation plan, test vectors, and operational risk mitigation.
+          </p>
+          <div class="flex flex-wrap gap-2 text-xs font-medium text-slate-500">
+            <span class="bg-white border border-slate-200 px-3 py-1 rounded-md">Rust-Lightning</span>
+            <span class="bg-white border border-slate-200 px-3 py-1 rounded-md">Coin Selection</span>
+            <span class="bg-white border border-slate-200 px-3 py-1 rounded-md">Fee Management</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reflection -->
+      <div>
+        <span class="text-accent text-sm font-semibold uppercase tracking-wider">Retrospective</span>
+        <h2 class="text-3xl sm:text-4xl font-bold text-navy mt-1 mb-6 fade-in">Reflection</h2>
+        <div class="bg-white border-l-4 border-accent pl-6 py-2 fade-in">
+          <p class="text-lg leading-relaxed text-slate-700">
+            The three months showed the value of a clear sequence: theory first, then deliberate time inside an existing codebase through building and reviewing, then opening changes. Habits such as testing pull requests locally, learning a project’s review language, and paying attention to what maintainers were focused on made later contributions more effective.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer / Contact -->
+  <footer id="contact" class="bg-navy text-white py-16">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      <div class="w-16 h-16 rounded-full overflow-hidden mx-auto mb-4 border-2 border-accent/60 shadow-lg">
+        <img 
+          src="assets/profile.jpg" 
+          alt="Muhammad Hamza" 
+          class="w-full h-full object-cover"
+          onerror="this.src='https://avatars.githubusercontent.com/u/95727844?v=4'"
+        >
+      </div>
+      <h3 class="text-2xl font-bold text-white mb-2">Muhammad Hamza</h3>
+      <p class="text-slate-300 mb-6 font-medium">Open Source Contributions &bull; Bitcoin Core &amp; LDK</p>
+      
+      <!-- Social and Quick Action Buttons -->
+      <div class="flex justify-center items-center gap-4 text-xl mb-8">
+        <a href="https://github.com/Hamza1610" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-slate-800 hover:bg-accent hover:text-navy transition flex items-center justify-center border border-slate-700" title="GitHub Profile">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://medium.com/@hamza.00dev1" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-slate-800 hover:bg-accent hover:text-navy transition flex items-center justify-center border border-slate-700" title="Medium Articles">
+          <i class="fab fa-medium"></i>
+        </a>
+        <a href="mailto:hamza.00dev1@gmail.com" class="w-10 h-10 rounded-full bg-slate-800 hover:bg-accent hover:text-navy transition flex items-center justify-center border border-slate-700" title="Email Contact">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </div>
+      
+      <div class="border-t border-slate-800 pt-8 mt-4 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-4">
+        <p>&copy; 2026 Muhammad Hamza &bull; BTrust Fellowship</p>
+        <div class="flex space-x-6">
+          <a href="#home" class="hover:text-accent transition">Back to Top <i class="fas fa-arrow-up text-[10px] ml-1"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
