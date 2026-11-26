@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design Document: Forced Conflicting Coin Selection Optimization | Muhammad Hamza</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-amber-200 selection:text-navy">
+
+  <!-- Navigation Bar -->
+  <header class="sticky top-0 bg-white/95 backdrop-blur-md border-b border-slate-200 z-50">
+    <div class="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="index.html#design" class="inline-flex items-center gap-2 text-sm font-semibold text-slate-700 hover:text-amber-700 transition">
+        <i class="fas fa-arrow-left"></i>
+        <span>Back to Portfolio</span>
+      </a>
+      <div class="flex items-center gap-3">
+        <a href="https://github.com/Hamza1610/open-source-portfolio/blob/main/docs/issue_5435_design_document.md" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-medium text-slate-600 hover:text-navy bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-md border border-slate-200 transition">
+          <i class="fab fa-github"></i>
+          <span>View Raw Markdown</span>
+        </a>
+        <a href="https://git.rust-bitcoin.org/lightningdevkit/rust-lightning/issues/5435" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-semibold text-amber-900 bg-amber-100 hover:bg-amber-200 px-3 py-1.5 rounded-md border border-amber-300 transition">
+          <span>Tracking Issue 5435</span>
+          <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Document Header -->
+  <main class="max-w-4xl mx-auto px-6 py-12">
+    <div class="border-b border-slate-200 pb-8 mb-8">
+      <div class="flex items-center gap-2 mb-3">
+        <span class="bg-amber-100 text-amber-900 border border-amber-300 text-xs font-mono font-bold px-2.5 py-1 rounded">RFC / SPEC</span>
+        <span class="text-xs text-slate-500 font-mono">LDK Core &bull; P3 Hardening</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-navy tracking-tight mb-4">
+        Design Document: Forced Conflicting Coin Selection Optimization
+      </h1>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-slate-600 bg-white p-4 rounded-xl border border-slate-200">
+        <div><strong>Author:</strong> Muhammad Hamza</div>
+        <div><strong>Target Repository:</strong> <code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono">lightningdevkit/rust-lightning</code></div>
+        <div><strong>Tracking Issue:</strong> <a href="https://git.rust-bitcoin.org/lightningdevkit/rust-lightning/issues/5435" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">Issue 5435 (Forgejo)</a></div>
+        <div><strong>Affected Component:</strong> <code class="bg-slate-100 px-1.5 py-0.5 rounded text-xs font-mono">lightning/src/util/wallet_utils.rs</code></div>
+      </div>
+    </div>
+
+    <!-- Article Content -->
+    <article class="prose prose-slate max-w-none text-slate-700 space-y-8 leading-relaxed">
+      
+      <section>
+        <h2 class="text-2xl font-bold text-navy mb-4 border-b pb-2">1. Engineering Background &amp; Skill Alignment</h2>
+        <p class="mb-4">
+          Resolving Issue 5435 requires a convergence of systems-level Rust programming, Bitcoin transaction construction mechanics, and algorithmic optimization under strict state invariants.
+        </p>
+        <div class="space-y-4">
+          <div class="bg-white p-5 rounded-lg border border-slate-200">
+            <h3 class="font-semibold text-navy text-lg mb-2">1.1 Systems-Level Rust Engineering</h3>
+            <ul class="list-disc pl-5 space-y-2 text-sm text-slate-600">
+              <li><strong>Data Structure Manipulation:</strong> Low-overhead collection processing within <code class="bg-slate-100 px-1.5 py-0.5 rounded font-mono text-xs">lightning/src/util/wallet_utils.rs</code> utilizing nested hashing (<code class="font-mono text-xs">HashMap</code>), double-ended queues (<code class="font-mono text-xs">VecDeque</code>), composite ordering keys with lexicographical comparison (<code class="font-mono text-xs">sort_unstable_by_key</code>), and <code class="font-mono text-xs">core::cmp::Reverse</code> wrappers.</li>
+              <li><strong>Invariant &amp; State Safety:</strong> LDK maintains a locked-coin tracking table in memory (<code class="font-mono text-xs">locked_utxos: Mutex&lt;HashMap&lt;OutPoint, Option&lt;ClaimId&gt;&gt;&gt;</code>). Manipulating these entries during coin selection requires clean lock management, avoiding deadlocks, and maintaining rollback integrity if downstream lookups fail.</li>
+              <li><strong>Zero Allocations &amp; <code class="font-mono text-xs">no-std</code> Compliance:</strong> Core crates in LDK target constrained environments. Modifications avoid unbounded allocations, unnecessary cloning, and external runtime dependencies.</li>
+            </ul>
+          </div>
+
+          <div class="bg-white p-5 rounded-lg border border-slate-200">
+            <h3 class="font-semibold text-navy text-lg mb-2">1.2 Bitcoin Protocol &amp; Transaction Construction</h3>
+            <ul class="list-disc pl-5 space-y-2 text-sm text-slate-600">
+              <li><strong>UTXO Effective Value:</strong> Accurate selection depends on calculating the effective value of an output (<code class="font-mono text-xs">value - fee_for_weight</code>), properly factoring in witness satisfaction weights (<code class="font-mono text-xs">P2WPKH</code>, <code class="font-mono text-xs">P2TR</code>, <code class="font-mono text-xs">P2WSH</code>), legacy script overhead, and dust limits.</li>
+              <li><strong>Mempool Replacement (RBF) &amp; Claim Conflict Dynamics:</strong> When a wallet's liquid UTXOs are exhausted, choosing which locked UTXO to borrow effectively initiates an in-protocol double-spend. Understanding how package claiming (<code class="font-mono text-xs">lightning/src/chain/package.rs</code>) handles displaced claim transactions—and how RBF fee escalation cascades—is essential to evaluating displacement policies.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-navy mb-4 border-b pb-2">2. Problem Context &amp; Root Cause Analysis</h2>
+        <div class="bg-amber-50/60 border-l-4 border-amber-400 p-4 rounded-r-lg mb-6">
+          <h3 class="font-semibold text-amber-900 text-sm uppercase tracking-wider mb-1">The Specification Invariant</h3>
+          <p class="text-slate-700 italic text-sm">
+            "If all of the available UTXOs have already been assigned to other claims, implementations must be willing to double spend their UTXOs. The choice of which UTXOs to double spend is left to the implementation, but it must strive to keep the set of other claims being double spent to a minimum."
+          </p>
+          <span class="text-xs text-slate-500 block mt-2">— CoinSelectionSource protocol requirement</span>
+        </div>
+
+        <h3 class="font-semibold text-navy text-lg mb-2">The Failure Mode</h3>
+        <p class="mb-4">
+          <code class="bg-slate-100 px-1.5 py-0.5 rounded font-mono text-xs">Wallet::select_confirmed_utxos_internal</code> falls back to <code class="font-mono text-xs">force_conflicting_utxo_spend = true</code> only after attempts using unreserved coins have failed. In this fallback state, all locked UTXOs were previously sorted globally by effective value alone, completely oblivious to the owning <code class="font-mono text-xs">ClaimId</code>. As a result, small coins from multiple independent claims were greedily fragmented and displaced.
+        </p>
+
+        <div class="bg-slate-900 text-slate-200 p-4 rounded-xl font-mono text-xs overflow-x-auto mb-4">
+          <span class="text-slate-400">// Concrete Example</span><br>
+          * Claim A holds: [1,000 sat, 3,000 sat]<br>
+          * Claim B holds: [1,100 sat]<br>
+          * Incoming Claim C requires: 1,800 sat<br><br>
+          <span class="text-rose-400">Previous Behavior:</span> Sorts [1,000 (A), 1,100 (B), 3,000 (A)] &rarr; Takes 1,000 + 1,100. Displaces BOTH Claim A and Claim B.<br>
+          <span class="text-emerald-400">Optimized Behavior:</span> Takes 3,000 sat coin from Claim A. Displaces ONLY Claim A.
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-navy mb-4 border-b pb-2">3. Recommended Architecture: Value-Group Greedy Sort</h2>
+        <p class="mb-4">
+          To maintain strict <code class="font-mono text-xs">no-std</code> boundaries and avoid interface leakage into external wallet abstractions, the design employs a hierarchical composite sorting key:
+        </p>
+        
+        <div class="bg-white p-5 rounded-xl border border-slate-200 space-y-3">
+          <div class="font-mono text-xs text-blue-800 bg-blue-50 p-3 rounded-lg border border-blue-200">
+            Composite Key = (IsConflicting, Reverse(GroupTotalValue), ClaimId, EffectiveValue)
+          </div>
+          <ol class="list-decimal pl-5 space-y-2 text-sm text-slate-600">
+            <li><strong>Phase 1: Aggregate Power</strong> — Precompute total effective purchasing power per conflicting claim in a single linear pass.</li>
+            <li><strong>Phase 2: Priority Grouping</strong> — Unlocked coins retain highest priority; conflicting coins are grouped by claim and sorted so highest-power claims evaluate first.</li>
+            <li><strong>Phase 3: Greedy Linear Walk</strong> — Single-claim fulfillment is achieved without recursive backtracking or external dependency leakage.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-navy mb-4 border-b pb-2">4. Rust Implementation Specification</h2>
+        <div class="bg-slate-900 text-slate-100 p-5 rounded-xl font-mono text-xs overflow-x-auto leading-relaxed">
+<pre><code><span class="text-slate-400">// 1. Identify conflicting claim ownership</span>
+<span class="text-purple-300">let</span> conflicting_claim_id = |utxo: &Utxo| {
+    locked_utxos
+        .get(&utxo.outpoint)
+        .and_then(|utxo_claim_id| *utxo_claim_id)
+        .filter(|utxo_claim_id| <span class="text-amber-300">Some</span>(*utxo_claim_id) != claim_id)
+};
+
+<span class="text-slate-400">// 2. Pre-compute total effective purchasing power per conflicting claim</span>
+<span class="text-purple-300">let</span> <span class="text-purple-300">mut</span> conflicting_claim_values = new_hash_map();
+<span class="text-purple-300">for</span> (utxo, fee_to_spend_utxo) <span class="text-purple-300">in</span> &eligible_utxos {
+    <span class="text-purple-300">if</span> <span class="text-purple-300">let</span> <span class="text-amber-300">Some</span>(c_id) = conflicting_claim_id(utxo) {
+        <span class="text-purple-300">let</span> effective_value = utxo.output.value - *fee_to_spend_utxo;
+        conflicting_claim_values
+            .entry(c_id)
+            .and_modify(|val| *val += effective_value)
+            .or_insert(effective_value);
+    }
+}
+
+<span class="text-slate-400">// 3. Composite Sort: Unlocked coins first, richest conflicting claims first</span>
+eligible_utxos.sort_unstable_by_key(|(utxo, fee_to_spend_utxo)| {
+    <span class="text-purple-300">let</span> effective_value = utxo.output.value - *fee_to_spend_utxo;
+    <span class="text-purple-300">let</span> conflicting_claim = conflicting_claim_id(utxo).map(|c_id| {
+        (
+            core::cmp::Reverse(*conflicting_claim_values.get(&c_id).unwrap()),
+            c_id.<span class="text-cyan-300">0</span>,
+        )
+    });
+    (conflicting_claim, effective_value)
+});</code></pre>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-bold text-navy mb-4 border-b pb-2">5. Verification Commands</h2>
+        <div class="bg-slate-900 text-slate-100 p-4 rounded-xl font-mono text-xs overflow-x-auto space-y-2">
+          <p class="text-slate-400"># Verify LDK wallet utilities and bump transaction modules (MSRV 1.75.0)</p>
+          <p class="text-emerald-400">cargo +1.75.0 test -p lightning --lib util::wallet_utils</p>
+          <p class="text-emerald-400">cargo +1.75.0 test -p lightning --lib events::bump_transaction</p>
+          <p class="text-slate-400 mt-2"># Check formatting against workspace standards (1.85.0)</p>
+          <p class="text-emerald-400">cargo +1.85.0 fmt --all --check</p>
+        </div>
+      </section>
+
+    </article>
+
+    <!-- Footer of Doc -->
+    <div class="mt-16 pt-8 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-500">
+      <a href="index.html#design" class="text-accent font-semibold hover:underline">
+        &larr; Back to Portfolio
+      </a>
+      <div class="flex items-center gap-4">
+        <a href="https://git.rust-bitcoin.org/lightningdevkit/rust-lightning/issues/5435" target="_blank" rel="noopener noreferrer" class="hover:text-navy">Forgejo Issue 5435</a>
+        <span>&bull;</span>
+        <a href="https://github.com/Hamza1610/open-source-portfolio" target="_blank" rel="noopener noreferrer" class="hover:text-navy">GitHub Repository</a>
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>
