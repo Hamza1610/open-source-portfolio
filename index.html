@@ -380,71 +380,31 @@
                 <i class="fas fa-clipboard-check text-purple-600 text-sm"></i>
                 <span>PR Reviews</span>
               </h4>
-              <span class="text-xs text-slate-500 font-mono">3 Reviewed</span>
+              <span class="text-xs text-slate-500 font-mono">3 PRs</span>
             </div>
             
             <div class="contribution-list flex-grow">
-              
-              <!-- PR 5710 -->
-              <details class="review-item group">
-                <summary>
-                  <a href="https://git.rust-bitcoin.org/lightningdevkit/rust-lightning/pulls/5710" target="_blank" rel="noopener noreferrer" class="contribution-badge badge-review" onclick="event.stopPropagation();" title="Open LDK PR 5710">
-                    <span>PR 5710</span>
-                    <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
-                  </a>
-                  <div class="flex-grow min-w-0">
-                    <div class="font-medium text-xs text-slate-800 truncate">Fail late updates on closed channels</div>
-                    <div class="text-[11px] text-purple-700 font-medium">Splice race &bull; Local test verification</div>
-                  </div>
-                  <i class="fas fa-chevron-down text-slate-400 text-xs review-toggle-icon mt-1"></i>
-                </summary>
-                <div class="review-body space-y-2">
-                  <p><strong>Context:</strong> When a channel had a pending splice and force-closed before peers exchanged <code class="bg-slate-100 px-1 rounded text-xs font-mono">splice_locked</code>, late updates arriving after closure were silently ignored without setting <code class="bg-slate-100 px-1 rounded text-xs font-mono">ret = Err(())</code>.</p>
-                  <p><strong>Review Contribution:</strong> Executed end-to-end splice test suite (<code class="bg-slate-100 px-1 rounded text-xs font-mono">test_splice_rbf_discard_after_close_with_confirmed_candidate</code>) locally on Rust 1.75.0. Advised author with a non-blocking suggestion to add targeted unit test coverage asserting the exact <code class="bg-slate-100 px-1 rounded text-xs font-mono">Err(())</code> return value.</p>
-                  <p class="text-emerald-700 font-medium"><strong>Outcome:</strong> Verified test correctness and contributed actionable test coverage feedback.</p>
-                </div>
-              </details>
-
-              <!-- PR 5713 -->
-              <details class="review-item group">
-                <summary>
-                  <a href="https://git.rust-bitcoin.org/lightningdevkit/rust-lightning/pulls/5713" target="_blank" rel="noopener noreferrer" class="contribution-badge badge-review" onclick="event.stopPropagation();" title="Open LDK PR 5713">
-                    <span>PR 5713</span>
-                    <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
-                  </a>
-                  <div class="flex-grow min-w-0">
-                    <div class="font-medium text-xs text-slate-800 truncate">Blame channel on badonion failures</div>
-                    <div class="text-[11px] text-purple-700 font-medium">Route hints &bull; Commit squashing hygiene</div>
-                  </div>
-                  <i class="fas fa-chevron-down text-slate-400 text-xs review-toggle-icon mt-1"></i>
-                </summary>
-                <div class="review-body space-y-2">
-                  <p><strong>Context:</strong> For unannounced route hint channels (e.g. private channels to LSPs), no SCID was emitted on BADONION failure, causing the router to continuously loop over broken hints rather than trying working alternative hints.</p>
-                  <p><strong>Review Contribution:</strong> Tested and verified that both regression tests (<code class="bg-slate-100 px-1 rounded text-xs font-mono">test_badonion_failure_retries_over_next_route_hint</code>) passed locally. Recommended squashing commits into a clean, single atomic commit adhering to LDK history hygiene.</p>
-                  <p class="text-emerald-700 font-medium"><strong>Outcome:</strong> Confirmed functional fix and provided actionable commit hygiene review.</p>
-                </div>
-              </details>
-
-              <!-- PR 5707 -->
-              <details class="review-item group">
-                <summary>
-                  <a href="https://git.rust-bitcoin.org/lightningdevkit/rust-lightning/pulls/5707" target="_blank" rel="noopener noreferrer" class="contribution-badge badge-review" onclick="event.stopPropagation();" title="Open LDK PR 5707">
-                    <span>PR 5707</span>
-                    <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
-                  </a>
-                  <div class="flex-grow min-w-0">
-                    <div class="font-medium text-xs text-slate-800 truncate">Claim HTLC when preimage learned</div>
-                    <div class="text-[11px] text-purple-700 font-medium">Prevented fund loss &bull; Toolchain execution</div>
-                  </div>
-                  <i class="fas fa-chevron-down text-slate-400 text-xs review-toggle-icon mt-1"></i>
-                </summary>
-                <div class="review-body space-y-2">
-                  <p><strong>Context:</strong> A race condition where on-chain preimage revelation coincided with queued fail-backs in holding cells could result in complete loss of forwarded funds upon reconnection.</p>
-                  <p><strong>Review Contribution:</strong> When automated review bots were restricted to static analysis without toolchain execution, stepped in and compiled and executed the test locally on Rust 1.75.0 using <code class="bg-slate-100 px-1 rounded text-xs font-mono">RUSTFLAGS="-C debug-assertions=off"</code> to rigorously test the fallback branch requested by maintainers.</p>
-                  <p class="text-emerald-700 font-medium"><strong>Outcome:</strong> Provided high-signal confirmation of test execution confirming loss-of-funds resolution.</p>
-                </div>
-              </details>
-
+              <div class="contribution-item">
+                <a href="https://git.rust-bitcoin.org/lightningdevkit/rust-lightning/pulls/5710" target="_blank" rel="noopener noreferrer" class="contribution-badge badge-review" title="Open LDK PR 5710">
+                  <span>PR 5710</span>
+                  <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
+                </a>
+                <span class="contribution-desc">Fail late RenegotiatedFundingLocked updates on closed channels</span>
+              </div>
+              <div class="contribution-item">
+                <a href="https://git.rust-bitcoin.org/lightningdevkit/rust-lightning/pulls/5713" target="_blank" rel="noopener noreferrer" class="contribution-badge badge-review" title="Open LDK PR 5713">
+                  <span>PR 5713</span>
+                  <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
+                </a>
+                <span class="contribution-desc">Blame the reported channel on badonion payment failures</span>
+              </div>
+              <div class="contribution-item">
+                <a href="https://git.rust-bitcoin.org/lightningdevkit/rust-lightning/pulls/5707" target="_blank" rel="noopener noreferrer" class="contribution-badge badge-review" title="Open LDK PR 5707">
+                  <span>PR 5707</span>
+                  <i class="fas fa-arrow-up-right-from-square text-[10px]"></i>
+                </a>
+                <span class="contribution-desc">Claim HTLC when preimage learned after fail-back queued in holding cell</span>
+              </div>
             </div>
           </div>
 
